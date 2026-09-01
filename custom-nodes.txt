@@ -1,0 +1,15 @@
+=== custom_nodes/ComfyUI-Manager ===
+https://github.com/ltdrdata/ComfyUI-Manager.git
+8d5a95d1864de3660fcff872c893f6fb6b96ef9c
+=== custom_nodes/ComfyUI-RunpodDirect ===
+https://github.com/MadiatorLabs/ComfyUI-RunpodDirect.git
+a59de479cbf06064d3a67f1457f48dbbd7f42e0a
+=== custom_nodes/ComfyUI-KJNodes ===
+https://github.com/kijai/ComfyUI-KJNodes.git
+e0c3fcb388464ffba5ef775bd29e2f793c032ca9
+=== custom_nodes/Civicomfy ===
+https://github.com/MoonGoblinDev/Civicomfy.git
+3e83e70824e26672c32615142217bb0006c8e562
+=== custom_nodes/ComfyUI-GGUF ===
+https://github.com/city96/ComfyUI-GGUF
+6ea2651e7df66d7585f6ffee804b20e92fb38b8a

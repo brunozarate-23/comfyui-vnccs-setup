@@ -1,0 +1,13 @@
+*.safetensors
+*.gguf
+*.pth
+*.pt
+*.ckpt
+*.bin
+*.onnx
+*.zip
+
+models/
+.venv/
+.venv-*/
+__pycache__/
