@@ -161,7 +161,6 @@ for repo in \
     ComfyUI_VNCCS \
     ComfyUI_VNCCS_Utils \
     ComfyUI-GGUF \
-    ComfyUI-Impact-Pack \
     ComfyUI-Impact-Subpack \
     ComfyUI-Easy-Sam3
 do
@@ -171,10 +170,30 @@ do
         echo
         echo ">>> $repo requirements"
         python -m pip install -r "$REQUIREMENTS"
-    else
-        echo "No requirements.txt: $repo"
     fi
 done
+
+# Impact Pack needs facebookresearch/sam2.
+# RunPod pins PyTorch, and SAM2's isolated build environment can conflict
+# with that constraint even though the installed torch version is compatible.
+
+echo
+echo ">>> Installing SAM2 for Impact Pack"
+
+python -m pip install \
+    --no-build-isolation \
+    "git+https://github.com/facebookresearch/sam2"
+
+echo
+echo ">>> Installing Impact Pack requirements"
+
+grep -v 'facebookresearch/sam2' \
+    custom_nodes/ComfyUI-Impact-Pack/requirements.txt \
+    > /tmp/impact-pack-requirements.txt
+
+python -m pip install -r /tmp/impact-pack-requirements.txt
+
+rm -f /tmp/impact-pack-requirements.txt
 
 # ------------------------------------------------------------
 # Hugging Face CLI
