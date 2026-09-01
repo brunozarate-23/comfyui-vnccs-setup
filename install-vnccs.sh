@@ -509,16 +509,15 @@ SEEDVR_REVISION="a457bf495efbd40ea92f699f7d2b5d2febeca176"
 
 download_hf \
     "$SEEDVR_REPO" \
-    "seedvr2_3b_fp8_e4m3fn.safetensors" \
+    "diffusion_models/seedvr2_3b_fp8_e4m3fn.safetensors" \
     "$COMFYUI_DIR/models/diffusion_models" \
     "$SEEDVR_REVISION"
 
 download_hf \
     "$SEEDVR_REPO" \
-    "ema_vae_fp16.safetensors" \
+    "vae/ema_vae_fp16.safetensors" \
     "$COMFYUI_DIR/models/vae" \
     "$SEEDVR_REVISION"
-
 # ------------------------------------------------------------
 # 9. Final verification.
 # ------------------------------------------------------------
