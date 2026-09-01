@@ -72,6 +72,72 @@ echo "Using Python environment: $VENV"
 
 source "$VENV/bin/activate"
 
+# ------------------------------------------------------------
+# Update ComfyUI core
+# ------------------------------------------------------------
+
+echo
+echo "============================================"
+echo " Updating ComfyUI"
+echo "============================================"
+
+cd "$COMFYUI_DIR"
+
+if [ -d ".git" ]; then
+    git fetch origin
+
+    CURRENT_BRANCH="$(git branch --show-current)"
+
+    if [ -n "$CURRENT_BRANCH" ]; then
+        git pull --ff-only origin "$CURRENT_BRANCH"
+    else
+        echo "WARNING: ComfyUI is in detached HEAD state; skipping automatic pull."
+    fi
+else
+    echo "WARNING: ComfyUI is not a Git repository; skipping core update."
+fi
+
+# ------------------------------------------------------------
+# Update ComfyUI-Manager
+# ------------------------------------------------------------
+
+echo
+echo "============================================"
+echo " Updating ComfyUI-Manager"
+echo "============================================"
+
+MANAGER_DIR="$COMFYUI_DIR/custom_nodes/ComfyUI-Manager"
+
+if [ -d "$MANAGER_DIR/.git" ]; then
+    git -C "$MANAGER_DIR" fetch origin
+
+    MANAGER_BRANCH="$(git -C "$MANAGER_DIR" branch --show-current)"
+
+    if [ -n "$MANAGER_BRANCH" ]; then
+        git -C "$MANAGER_DIR" pull --ff-only origin "$MANAGER_BRANCH"
+    else
+        echo "WARNING: ComfyUI-Manager is in detached HEAD state."
+    fi
+else
+    echo "ComfyUI-Manager Git repository not found; leaving template installation untouched."
+fi
+
+echo
+echo "============================================"
+echo " Checking ComfyUI environment"
+echo "============================================"
+
+python - <<'PY'
+import torch
+
+print("PyTorch:", torch.__version__)
+print("CUDA runtime:", torch.version.cuda)
+print("CUDA available:", torch.cuda.is_available())
+
+if torch.cuda.is_available():
+    print("GPU:", torch.cuda.get_device_name(0))
+PY
+
 echo "Python: $(which python)"
 python --version
 
